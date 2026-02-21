@@ -1,4 +1,5 @@
 site_name: AIDF Platform Documentation
+site_url: https://asvskartheek.github.io/aidf-docs/
 site_description: Comprehensive reference for the Centific AI Data Foundry (AIDF) platform — covering all six training sessions from February 2026.
 site_author: Centific
 docs_dir: docs_src
