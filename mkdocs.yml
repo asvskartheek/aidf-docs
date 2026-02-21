@@ -1,0 +1,95 @@
+site_name: AIDF Platform Documentation
+site_description: Comprehensive reference for the Centific AI Data Foundry (AIDF) platform — covering all six training sessions from February 2026.
+site_author: Centific
+docs_dir: docs_src
+site_dir: site
+
+theme:
+  name: material
+  palette:
+    scheme: slate
+    primary: indigo
+    accent: indigo
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.footer
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+    - toc.follow
+  icon:
+    repo: fontawesome/brands/github
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - attr_list
+  - md_in_html
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - toc:
+      permalink: true
+
+plugins:
+  - search
+
+extra_css:
+  - stylesheets/extra.css
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - First Steps: first-steps.md
+    - Build an AI Service (Tutorial): tutorial.md
+  - Platform Modules:
+    - Data Hub: platform/data-hub.md
+    - AI Workbench: platform/ai-workbench.md
+    - GenAI Studio: platform/genai-studio.md
+    - Agent Workbench: platform/agent-workbench.md
+    - GenBI: platform/genbi.md
+  - Infra Hub:
+    - Overview: infra-hub/index.md
+    - Workspaces: infra-hub/workspaces.md
+    - Projects & Environments: infra-hub/projects.md
+    - Managing AI Services: infra-hub/ai-services.md
+    - Pipeline Templates: infra-hub/pipeline-templates.md
+    - HIL Tasks: infra-hub/hil-tasks.md
+    - Roles & Permissions: infra-hub/rbac.md
+  - Developer Guide:
+    - What is an AI Service: developer/index.md
+    - Folder Structure: developer/folder-structure.md
+    - Strategy Design Pattern: developer/strategy-pattern.md
+    - Logging: developer/logging.md
+    - Onboarding: developer/onboarding.md
+    - Docker & Deployment: developer/docker.md
+    - Manifest File: developer/manifest.md
+  - Code Reference:
+    - Reference Template: reference/reference-template.md
+    - Phi-4 Fine-Tuning Service: reference/phi4-service.md
+    - Suspicious Activity Detection: reference/suspicious-activity.md
+  - Appendix:
+    - Technology Stack: appendix/tech-stack.md
+    - Deployment Environments: appendix/environments.md
+    - Compute Offloading: appendix/compute-offloading.md
