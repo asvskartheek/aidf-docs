@@ -1,0 +1,17 @@
+/* AIDF brand color overrides for Material slate theme */
+:root {
+  --md-primary-fg-color: #4f7cff;
+  --md-accent-fg-color:  #4f7cff;
+}
+
+/* Code block header styling */
+.md-typeset .highlight .filename {
+  color: #3ecf8e;
+  font-weight: 600;
+}
+
+/* Tighten admonition spacing */
+.md-typeset .admonition,
+.md-typeset details {
+  font-size: 0.85rem;
+}
