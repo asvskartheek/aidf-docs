@@ -2,26 +2,28 @@
 
 ## What This Project Is
 
-This is the **MkDocs documentation site** for the Centific AI Data Foundry (AIDF) platform, covering all six February 2026 training sessions. The content was originally authored as custom HTML files and has been migrated to MkDocs with the Material theme for easy hosting and maintenance.
+This is the **Zensical documentation site** for the Centific AI Data Foundry (AIDF) platform, covering all six February 2026 training sessions. The content was originally authored as custom HTML files, migrated to MkDocs with the Material theme, and subsequently moved to **Zensical** (the MkDocs-compatible successor built by the Material for MkDocs team) for long-term maintainability.
 
 ## Tech Stack
 
 | Tool | Purpose |
 |------|---------|
-| [MkDocs](https://www.mkdocs.org/) | Static site generator for documentation |
-| [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) | Theme — dark slate, navigation tabs, search, code copy |
+| [Zensical](https://zensical.org/) | Static site generator (MkDocs-compatible successor by the Material for MkDocs team) |
 | [uv](https://docs.astral.sh/uv/) | Python package and environment manager |
-| [pymdownx extensions](https://facelessuser.github.io/pymdown-extensions/) | Admonitions, superfences, tasklists, emoji/icons, tabbed content |
+| [pymdownx extensions](https://facelessuser.github.io/pymdown-extensions/) | Admonitions, superfences, tasklists, emoji/icons, tabbed content (bundled with Zensical) |
 
 ## Directory Layout
 
 ```
 Training/
+├── .github/
+│   └── workflows/
+│       └── docs.yml       # GitHub Actions workflow for deploying to GitHub Pages
 ├── CLAUDE.md              # This file
-├── mkdocs.yml             # MkDocs configuration (theme, nav, extensions)
+├── mkdocs.yml             # Site configuration (theme, nav, extensions) — read by Zensical as-is
 ├── pyproject.toml         # Python project deps managed by uv
 ├── uv.lock                # Locked dependency versions
-├── docs_src/              # Markdown source files (MkDocs reads this)
+├── docs_src/              # Markdown source files (Zensical reads this)
 │   ├── index.md           # Home page — platform overview, modules, training sessions
 │   ├── first-steps.md     # 7-step walkthrough for new users
 │   ├── tutorial.md        # Full code tutorial: Build a Support Ticket Classifier AI Service
@@ -65,16 +67,15 @@ Training/
 
 ```bash
 # Local preview with live reload
-uv run mkdocs serve
+uv run zensical serve
 
 # Build static site to site/
-uv run mkdocs build
-
-# Deploy to GitHub Pages (gh-pages branch)
-uv run mkdocs gh-deploy
+uv run zensical build --clean
 ```
 
 ## Configuration Notes (`mkdocs.yml`)
+
+Zensical reads the existing `mkdocs.yml` directly — no conversion needed.
 
 - **`docs_dir: docs_src`** — Source is `docs_src/` (not the default `docs/`) to avoid conflict with the original HTML files in `docs/`
 - **`site_dir: site`** — Output goes to `site/`
@@ -90,7 +91,7 @@ uv run mkdocs gh-deploy
 
 1. Create `docs_src/<section>/your-page.md`
 2. Add it to the `nav:` section in `mkdocs.yml`
-3. Run `uv run mkdocs serve` to preview
+3. Run `uv run zensical serve` to preview
 
 ## Dependency Management
 
@@ -106,12 +107,14 @@ uv remove <package-name>
 
 ## GitHub Pages Deployment
 
-The site is deployed via `uv run mkdocs gh-deploy`, which:
-1. Builds the static site
-2. Force-pushes the `site/` contents to the `gh-pages` branch
-3. GitHub Pages serves the `gh-pages` branch at the configured URL
+The site is deployed automatically via **GitHub Actions** (`.github/workflows/docs.yml`). On every push to `main`, the workflow:
+1. Installs Zensical
+2. Builds the static site with `zensical build --clean`
+3. Deploys to GitHub Pages using the `actions/deploy-pages` action
 
-The source markdown files live on `main`; the built HTML lives on `gh-pages`. Never manually edit `gh-pages`.
+> **Note:** Zensical does not support `gh-deploy`. The GitHub Actions workflow replaces it.
+> You may need to enable GitHub Pages with "GitHub Actions" as the source in your repo settings
+> (Settings → Pages → Source → GitHub Actions).
 
 ## Content Origin
 
